@@ -1,0 +1,8 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+    cout << "Digital Attendance System - Starting Project" << endl;
+    cout << "Student Management System Initialized" << endl;
+    return 0;
+}
