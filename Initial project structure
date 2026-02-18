@@ -1,8 +1,64 @@
 #include <iostream>
+#include <string>
+#include <vector>
 using namespace std;
 
+// STUDENT CLASS
+class Student {
+private:
+    string indexNumber;
+    string name;
+    string department;
+    int level;
+
+public:
+    // Constructor
+    Student() {
+        level = 0;
+    }
+    
+    Student(string idx, string n, string dept, int lvl) {
+        indexNumber = idx;
+        name = n;
+        department = dept;
+        level = lvl;
+    }
+
+    // Getters
+    string getIndexNumber() {
+        return indexNumber;
+    }
+    
+    string getName() {
+        return name;
+    }
+    
+    string getDepartment() {
+        return department;
+    }
+    
+    int getLevel() {
+        return level;
+    }
+
+    // Display student info
+    void display() {
+        cout << "Index: " << indexNumber << endl;
+        cout << "Name: " << name << endl;
+        cout << "Department: " << department << endl;
+        cout << "Level: " << level << endl;
+        cout << "------------------------" << endl;
+    }
+};
+
 int main() {
-    cout << "Digital Attendance System - Starting Project" << endl;
-    cout << "Student Management System Initialized" << endl;
+    cout << "=== DIGITAL ATTENDANCE SYSTEM ===" << endl;
+    cout << "Student Class Created Successfully!" << endl;
+    
+    // Test Student class
+    Student testStudent("2025001", "John Doe", "Electrical Engineering", 200);
+    cout << "\nTest Student:" << endl;
+    testStudent.display();
+    
     return 0;
 }
