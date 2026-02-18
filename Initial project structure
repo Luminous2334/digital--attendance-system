@@ -1,3 +1,41 @@
+#include <iostream>
+#include <string>
+#include <vector>
+using namespace std;
+
+// STUDENT CLASS
+class Student {
+private:
+    string indexNumber;
+    string name;
+    string department;
+    int level;
+
+public:
+    Student() { level = 0; }
+    
+    Student(string idx, string n, string dept, int lvl) {
+        indexNumber = idx;
+        name = n;
+        department = dept;
+        level = lvl;
+    }
+
+    string getIndexNumber() { return indexNumber; }
+    string getName() { return name; }
+    string getDepartment() { return department; }
+    int getLevel() { return level; }
+
+    void display() {
+        cout << "Index: " << indexNumber << endl;
+        cout << "Name: " << name << endl;
+        cout << "Department: " << department << endl;
+        cout << "Level: " << level << endl;
+        cout << "------------------------" << endl;
+    }
+};
+
+// MAIN FUNCTION
 int main() {
     vector<Student> students;
     int choice;
@@ -6,48 +44,66 @@ int main() {
         cout << "\n=== DIGITAL ATTENDANCE SYSTEM ===" << endl;
         cout << "1. Add Student" << endl;
         cout << "2. View All Students" << endl;
-        cout << "3. Search Student" << endl;  // NEW
-        cout << "4. Exit" << endl;             // CHANGED
+        cout << "3. Search Student" << endl;
+        cout << "4. Exit" << endl;
         cout << "Choice: ";
         cin >> choice;
         
-        switch(choice) {
-            case 1: {
-                // ... same as before ...
-                break;
+        if(choice == 1) {
+            string idx, name, dept;
+            int level;
+            
+            cout << "Enter Index Number: ";
+            cin >> idx;
+            cin.ignore();
+            cout << "Enter Name: ";
+            getline(cin, name);
+            cout << "Enter Department: ";
+            getline(cin, dept);
+            cout << "Enter Level: ";
+            cin >> level;
+            
+            students.push_back(Student(idx, name, dept, level));
+            cout << "\n✓ Student Added Successfully!" << endl;
+        }
+        else if(choice == 2) {
+            if(students.empty()) {
+                cout << "\nNo students registered yet." << endl;
+            } else {
+                cout << "\n--- STUDENT LIST ---" << endl;
+                for(int i = 0; i < students.size(); i++) {
+                    students[i].display();
+                }
+                cout << "Total: " << students.size() << " students" << endl;
             }
-            case 2: {
-                // ... same as before ...
-                break;
-            }
-            case 3: {  // NEW SEARCH FUNCTION
-                if(students.empty()) {
-                    cout << "No students yet." << endl;
-                } else {
-                    string searchIdx;
-                    cout << "Enter Index Number to search: ";
-                    cin >> searchIdx;
-                    
-                    bool found = false;
-                    for(int i = 0; i < students.size(); i++) {
-                        if(students[i].getIndexNumber() == searchIdx) {
-                            cout << "\nSTUDENT FOUND:" << endl;
-                            students[i].display();
-                            found = true;
-                            break;
-                        }
-                    }
-                    if(!found) {
-                        cout << "Student not found!" << endl;
+        }
+        else if(choice == 3) {
+            if(students.empty()) {
+                cout << "\nNo students to search." << endl;
+            } else {
+                string searchIdx;
+                cout << "Enter Index Number to search: ";
+                cin >> searchIdx;
+                
+                bool found = false;
+                for(int i = 0; i < students.size(); i++) {
+                    if(students[i].getIndexNumber() == searchIdx) {
+                        cout << "\n✓ STUDENT FOUND:" << endl;
+                        students[i].display();
+                        found = true;
+                        break;
                     }
                 }
-                break;
+                if(!found) {
+                    cout << "\n✗ Student not found!" << endl;
+                }
             }
-            case 4:
-                cout << "Exiting..." << endl;
-                break;
-            default:
-                cout << "Invalid choice!" << endl;
+        }
+        else if(choice == 4) {
+            cout << "\nThank you for using the system. Goodbye!" << endl;
+        }
+        else {
+            cout << "\nInvalid choice! Please try again." << endl;
         }
     } while(choice != 4);
     
